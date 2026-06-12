@@ -36,6 +36,12 @@ class PublicController extends Controller
         return view('hubungi-kami');
     }
 
+    // Nampilin Tentang Kami
+    public function tentangKami()
+    {
+        return view('tentang-kami');
+    }
+
     // Fungsi buat nyimpen pesan dari pengunjung
     public function kirimPesan(Request $request)
     {

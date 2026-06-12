@@ -15,10 +15,10 @@
         Dari aroma robusta Bengkulu sampai rasa manis latte kekinian — semua ada di Kopi Kito.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="{{ route('kedai.index') }}" class="inline-flex items-center justify-center rounded-md font-medium bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all">
+        <a href="{{ route('kedai.index') }}" class="inline-flex h-12 items-center justify-center rounded-md font-medium bg-primary text-primary-foreground hover:bg-primary/90 px-8 shadow-lg hover:shadow-xl transition-all">
           Jelajahi Kedai <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
         </a>
-        <a href="{{ route('produk.index') }}" class="inline-flex items-center justify-center rounded-md font-medium border-2 border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all">
+        <a href="{{ route('produk.index') }}" class="inline-flex h-12 items-center justify-center rounded-md font-medium border-2 border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground px-8 shadow-lg hover:shadow-xl transition-all">
           Lihat Menu Kopi
         </a>
       </div>
@@ -69,13 +69,19 @@
         </div>
       </div>
     </div>
+
+    <div class="text-center mt-12">
+      <a href="{{ route('produk.index') }}" class="inline-flex h-11 items-center justify-center rounded-md font-medium border-2 border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground px-8 shadow-sm transition-all">
+        Lihat Semua Kategori <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+      </a>
+    </div>
   </section>
 
   <section class="bg-primary text-primary-foreground py-20">
     <div class="container mx-auto px-4 text-center">
       <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6">Siap Untuk Ngopi?</h2>
       <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Temukan kedai kopi favorit kamu dan rasakan kehangatan di setiap cangkir.</p>
-      <a href="{{ route('kedai.index') }}" class="inline-flex items-center justify-center rounded-md font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 text-lg px-8 py-6 shadow-lg hover:shadow-xl">
+      <a href="{{ route('kedai.index') }}" class="inline-flex h-12 items-center justify-center rounded-md font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 px-8 shadow-lg hover:shadow-xl transition-colors">
         Cari Kedai Terdekat
       </a>
     </div>

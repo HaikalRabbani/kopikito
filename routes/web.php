@@ -11,6 +11,7 @@ Route::get('/', [PublicController::class, 'index'])->name('beranda');
 Route::get('/daftar-kedai', [PublicController::class, 'daftarKedai'])->name('kedai.index');
 Route::get('/katalog-produk', [PublicController::class, 'katalogProduk'])->name('produk.index');
 Route::get('/hubungi-kami', [PublicController::class, 'hubungiKami'])->name('kontak');
+Route::get('/tentang-kami', [PublicController::class, 'tentangKami'])->name('tentang');
 Route::post('/kirim-pesan', [PublicController::class, 'kirimPesan'])->name('pesan.kirim');
 
 // ================= ROUTE ADMIN ================= //

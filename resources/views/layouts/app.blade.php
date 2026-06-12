@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kopi Kito - @yield('title', 'Sistem Informasi Pemasaran')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
@@ -23,6 +25,7 @@
             <a href="{{ route('beranda') }}" class="font-medium transition-colors hover:text-primary text-primary">Beranda</a>
             <a href="{{ route('produk.index') }}" class="font-medium transition-colors hover:text-primary text-foreground">Kategori Kopi</a>
             <a href="{{ route('kedai.index') }}" class="font-medium transition-colors hover:text-primary text-foreground">Daftar Kedai</a>
+            <a href="{{ route('tentang') }}" class="font-medium transition-colors hover:text-primary text-foreground">Tentang Kami</a>
             <a href="{{ route('kontak') }}" class="font-medium transition-colors hover:text-primary text-foreground">Hubungi Kami</a>
           </div>
 
@@ -36,6 +39,7 @@
           <a href="{{ route('beranda') }}" class="block py-3 font-medium transition-colors hover:text-primary text-primary">Beranda</a>
           <a href="{{ route('produk.index') }}" class="block py-3 font-medium transition-colors hover:text-primary text-foreground">Kategori Kopi</a>
           <a href="{{ route('kedai.index') }}" class="block py-3 font-medium transition-colors hover:text-primary text-foreground">Daftar Kedai</a>
+          <a href="{{ route('tentang') }}" class="block py-3 font-medium transition-colors hover:text-primary text-foreground">Tentang Kami</a>
           <a href="{{ route('kontak') }}" class="block py-3 font-medium transition-colors hover:text-primary text-foreground">Hubungi Kami</a>
         </div>
       </div>
