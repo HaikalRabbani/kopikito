@@ -62,6 +62,8 @@
                 title="Lokasi {{ $shop->nama_kedai }}"
               ></iframe>
             </div>
+            @endif
+            
           </div>
         </div>
       @empty
