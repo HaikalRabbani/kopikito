@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kedai extends Model
 {
     protected $table = 'kedai';
-    protected $fillable = ['nama_kedai', 'alamat', 'kontak', 'deskripsi', 'gambar'];
+    protected $fillable = ['nama_kedai', 'alamat', 'kontak', 'deskripsi', 'map_url', 'gambar'];
 
     // Relasi: Satu kedai bisa punya banyak produk kopi
     public function produk()

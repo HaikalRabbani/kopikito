@@ -14,6 +14,7 @@ return new class extends Migration
             $table->text('alamat');
             $table->string('kontak')->nullable();
             $table->text('deskripsi')->nullable();
+            $table->text('map_url')->nullable();
             $table->string('gambar')->nullable();
             $table->timestamps();
         });

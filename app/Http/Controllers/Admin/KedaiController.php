@@ -30,7 +30,8 @@ class KedaiController extends Controller
             'alamat' => 'required',
             'kontak' => 'nullable|string',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Validasi file gambar
+            'map_url' => 'nullable|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->all();
