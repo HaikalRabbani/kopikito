@@ -13,6 +13,8 @@ Route::get('/katalog-produk', [PublicController::class, 'katalogProduk'])->name(
 Route::get('/hubungi-kami', [PublicController::class, 'hubungiKami'])->name('kontak');
 Route::get('/tentang-kami', [PublicController::class, 'tentangKami'])->name('tentang');
 Route::post('/kirim-pesan', [PublicController::class, 'kirimPesan'])->name('pesan.kirim');
+Route::get('/hubungi-kami', [PublicController::class, 'kontak'])->name('kontak');
+Route::post('/hubungi-kami', [PublicController::class, 'storeKontak'])->name('kontak.store');
 
 // ================= ROUTE ADMIN ================= //
 // Nanti kita tambahin middleware 'auth' disini biar cuma admin yg bisa masuk

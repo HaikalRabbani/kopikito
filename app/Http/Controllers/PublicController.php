@@ -55,4 +55,29 @@ class PublicController extends Controller
 
         return redirect()->back()->with('success', 'Pesan berhasil dikirim!');
     }
+
+    // Menampilkan halaman form kontak
+    public function kontak()
+    {
+        return view('hubungi-kami');
+    }
+
+    // Memproses data form kontak ke database
+    public function storeKontak(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'pesan' => 'required|string',
+        ]);
+
+        Pesan::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'isi_pesan' => $request->pesan,
+        ]);
+
+        // Mengirim notifikasi sukses 
+        return back()->with('success', 'Pesan kamu berhasil dikirim! Kami akan segera menghubungi kamu.');
+    }
 }
