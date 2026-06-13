@@ -30,6 +30,7 @@
         </div>
         @endif
 
+        <!-- Tab Navigasi -->
         <div class="grid w-full grid-cols-5 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground mb-6 space-x-1">
             <button onclick="switchTab(event, 'tab-kategori')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:text-foreground">
                 Kategori
@@ -48,6 +49,7 @@
             </button>
         </div>
 
+        <!-- Konten Tab -->
         <div class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             
             <!-- Tab Menu -->
@@ -278,6 +280,7 @@
 </div>
 
 <script>
+    // Script untuk switch tab
     function switchTab(event, tabId) {
         document.querySelectorAll('.tab-content').forEach(el => {
             el.classList.add('hidden');
@@ -295,6 +298,7 @@
         event.currentTarget.classList.add('bg-background', 'text-foreground', 'shadow-sm', 'active-tab');
     }
 
+    // Script untuk modal dan preview gambar
     function openModal(modalId) {
         document.getElementById(modalId).classList.remove('hidden');
     }
@@ -303,6 +307,7 @@
         document.getElementById(modalId).classList.add('hidden');
     }
 
+    // Script Khusus Menu
     function previewImage(event) {
         const input = event.target;
         const container = document.getElementById('image-preview-container');
@@ -328,7 +333,7 @@
         container.classList.add('hidden');
     }
 
-    // Script Preview Khusus Kedai
+    // Script Khusus Kedai
     function previewImageKedai(event) {
         const input = event.target;
         const container = document.getElementById('preview-container-kedai');
