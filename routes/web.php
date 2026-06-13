@@ -30,34 +30,20 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/admin-logout', [AuthController::class, 'logout'])->name('logout');
     
-    // Dashboard utama admin
+    // 1. Dashboard utama admin 
     Route::get('/admin', function () {
-        return view('admin.dashboard');
+        $produks = \App\Models\Produk::with('kedai')->get();
+        $kedais = \App\Models\Kedai::all();
+        // Kalau ada pesan, tambahin juga: $pesans = \App\Models\Pesan::all();
+        
+        return view('admin.dashboard', compact('produks', 'kedais')); 
     })->name('admin.dashboard'); 
     
-    // CRUD Data Master Admin
+    // 2. CRUD Data Master Admin pakai Route::resource
+    // Nggak perlu nulis Route::post/put/delete manual karena resource otomatis bikin semuanya
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('kedai', KedaiController::class);
         Route::resource('produk', ProdukController::class);
         Route::resource('pesan', PesanController::class); 
     });
-
-    // 1. Ini Route buat nampilin UI Dashboard SPA-nya
-    Route::get('/admin', function () {
-        $produks = Produk::with('kedai')->get();
-        $kedais = Kedai::all();
-        // Nanti lempar semua data ke view admin.dashboard
-        return view('admin.dashboard', compact('produks', 'kedais')); 
-    })->name('admin.dashboard'); 
-
-    // 2. Ini Route buat proses datanya (Simpan, Update, Hapus)
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::resource('produk', ProdukController::class);
-    });
-
-    Route::prefix('admin')->name('admin.')->group(function () {
-    Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
-    Route::put('/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
-    Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
-});
 });
