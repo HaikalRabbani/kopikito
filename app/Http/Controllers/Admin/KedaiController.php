@@ -44,7 +44,7 @@ class KedaiController extends Controller
 
         Kedai::create($data);
 
-        return redirect()->route('admin.kedai.index')->with('success', 'Data Kedai berhasil ditambahkan!');
+        return back()->with('success', 'Data Kedai berhasil ditambahkan!');
     }
 
     // 4. Tampilkan form edit kedai
@@ -78,7 +78,7 @@ class KedaiController extends Controller
 
         $kedai->update($data);
 
-        return redirect()->route('admin.kedai.index')->with('success', 'Data Kedai berhasil diupdate!');
+        return back()->with('success', 'Data Kedai berhasil diupdate!');
     }
 
     // 6. Hapus data kedai
@@ -91,6 +91,6 @@ class KedaiController extends Controller
         
         $kedai->delete();
 
-        return redirect()->route('admin.kedai.index')->with('success', 'Data Kedai berhasil dihapus!');
+        return back()->with('success', 'Data Kedai berhasil dihapus!');
     }
 }
