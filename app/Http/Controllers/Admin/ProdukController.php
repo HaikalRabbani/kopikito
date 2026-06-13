@@ -46,7 +46,7 @@ class ProdukController extends Controller
 
         Produk::create($data);
 
-        return redirect()->route('admin.produk.index')->with('success', 'Data Produk berhasil ditambahkan!');
+        return back()->with('success', 'Data Produk berhasil ditambahkan!');
     }
 
     // 4. Tampilkan form edit produk
@@ -79,8 +79,7 @@ class ProdukController extends Controller
 
         $produk->update($data);
 
-        return redirect()->route('admin.produk.index')->with('success', 'Data Produk berhasil diupdate!');
-    }
+        return back()->with('success', 'Data Produk berhasil diupdate!');    }
 
     // 6. Hapus produk
     public function destroy(Produk $produk)
@@ -90,6 +89,6 @@ class ProdukController extends Controller
         }
         $produk->delete();
 
-        return redirect()->route('admin.produk.index')->with('success', 'Data Produk berhasil dihapus!');
+        return back()->with('success', 'Data Produk berhasil dihapus!');
     }
 }

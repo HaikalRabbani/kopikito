@@ -42,6 +42,19 @@ Route::middleware('auth')->group(function () {
         Route::resource('pesan', PesanController::class); 
     });
 
+    // 1. Ini Route buat nampilin UI Dashboard SPA-nya
+    Route::get('/admin', function () {
+        $produks = Produk::with('kedai')->get();
+        $kedais = Kedai::all();
+        // Nanti lempar semua data ke view admin.dashboard
+        return view('admin.dashboard', compact('produks', 'kedais')); 
+    })->name('admin.dashboard'); 
+
+    // 2. Ini Route buat proses datanya (Simpan, Update, Hapus)
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('produk', ProdukController::class);
+    });
+
     Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
     Route::put('/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
