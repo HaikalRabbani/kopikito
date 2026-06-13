@@ -8,10 +8,9 @@ use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\PesanController;
 
 // ================= ROUTE PUBLIK ================= //
-// Sesuai dengan fungsi di PublicController yang udah kita bikin
-Route::get('/', [PublicController::class, 'beranda'])->name('beranda');
-Route::get('/katalog', [PublicController::class, 'katalog'])->name('produk.index');
-Route::get('/daftar-kedai', [PublicController::class, 'kedai'])->name('kedai.index');
+Route::get('/', [PublicController::class, 'index'])->name('beranda');
+Route::get('/katalog', [PublicController::class, 'katalogProduk'])->name('produk.index');
+Route::get('/daftar-kedai', [PublicController::class, 'daftarKedai'])->name('kedai.index');
 Route::get('/tentang-kami', [PublicController::class, 'tentangKami'])->name('tentang');
 Route::get('/hubungi-kami', [PublicController::class, 'kontak'])->name('kontak');
 Route::post('/hubungi-kami', [PublicController::class, 'storeKontak'])->name('kontak.store');
