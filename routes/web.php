@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     
     // Dashboard utama admin
     Route::get('/admin', function () {
-        return "Ini halaman Dashboard Admin sementara! Jika lu lihat ini, berarti Login sukses.";
+        return view('admin.dashboard');
     })->name('admin.dashboard'); 
     
     // CRUD Data Master Admin
@@ -41,4 +41,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('produk', ProdukController::class);
         Route::resource('pesan', PesanController::class); 
     });
+
+    Route::prefix('admin')->name('admin.')->group(function () {
+    Route::post('/produk', [ProdukController::class, 'store'])->name('produk.store');
+    Route::put('/produk/{id}', [ProdukController::class, 'update'])->name('produk.update');
+    Route::delete('/produk/{id}', [ProdukController::class, 'destroy'])->name('produk.destroy');
+});
 });
