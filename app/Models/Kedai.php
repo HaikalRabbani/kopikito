@@ -14,4 +14,10 @@ class Kedai extends Model
     {
         return $this->hasMany(Produk::class, 'id_kedai');
     }
+    
+    // Taruh di dalam class Kedai
+    public function kategoris()
+    {
+        return $this->belongsToMany(Kategori::class, 'kategori_kedai', 'id_kedai', 'id_kategori');
+    }
 }

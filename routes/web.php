@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     // 1. Dashboard utama admin 
     Route::get('/admin', function () {
         $produks = \App\Models\Produk::with('kedai', 'kategori')->get();
-        $kedais = \App\Models\Kedai::all();
+       $kedais = \App\Models\Kedai::with('kategoris')->get();
         $pesans = \App\Models\Pesan::orderBy('created_at', 'desc')->get();
         $kategoris = \App\Models\Kategori::all();
         
@@ -46,5 +46,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('kedai', KedaiController::class);
         Route::resource('produk', ProdukController::class);
         Route::resource('pesan', PesanController::class); 
+        Route::resource('kategori', KategoriController::class); 
+        Route::post('/relasi', RelasiController::class, 'store')->name('relasi.store');
+        Route::delete('/relasi/{kedai}/{kategori}', RelasiController::class, 'destroy')->name('relasi.destroy');
     });
 });
