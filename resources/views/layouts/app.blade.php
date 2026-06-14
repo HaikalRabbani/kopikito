@@ -100,8 +100,8 @@
 
             <div class="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
                 <p class="text-primary-foreground/80">© 2025 Kopi Kito — Seduhan Lokal, Rasa Global.</p>
-                <a href="{{ route('login') }}" class="text-primary-foreground/60 hover:text-primary-foreground/80 text-sm mt-2 inline-block transition-colors">
-                    Admin
+                <a href="{{ Auth::check() ? route('admin.dashboard') : route('login') }}" class="text-primary-foreground/60 hover:text-primary-foreground/80 text-sm mt-2 inline-block transition-colors">
+                    {{ Auth::check() ? 'Dashboard Admin' : 'Login Admin' }}
                 </a>
             </div>
         </div>
