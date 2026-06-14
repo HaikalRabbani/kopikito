@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
         return view('admin.dashboard', compact('produks', 'kedais', 'pesans', 'kategoris')); 
     })->name('admin.dashboard'); 
     
-    // 2. CRUD Data Master Admin pakai Route::resource
+    // 2. CRUD Data Master Admin
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('kedai', KedaiController::class);
         Route::resource('produk', ProdukController::class);

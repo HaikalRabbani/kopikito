@@ -17,6 +17,17 @@ class KategoriController extends Controller
         return back()->with('success', 'Data Kategori berhasil ditambahkan!');
     }
 
+    public function update(Request $request, Kategori $kategori)
+    {
+        $data = $request->validate([
+            'nama_kategori' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string'
+        ]);
+        
+        $kategori->update($data);
+        return back()->with('success', 'Data Kategori berhasil diperbarui!');
+    }
+
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();

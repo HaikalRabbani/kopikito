@@ -63,7 +63,7 @@ class ProdukController extends Controller
             'id_kedai' => 'required|exists:kedai,id',
             'nama_produk' => 'required|string|max:255',
             'harga' => 'required|numeric',
-            'jenis_kopi' => 'nullable|string',
+            'id_kategori' => 'required|exists:kategori,id',
             'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -79,7 +79,8 @@ class ProdukController extends Controller
 
         $produk->update($data);
 
-        return back()->with('success', 'Data Produk berhasil diupdate!');    }
+        return back()->with('success', 'Data Produk berhasil diupdate!');
+    }
 
     // 6. Hapus produk
     public function destroy(Produk $produk)

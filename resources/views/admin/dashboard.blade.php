@@ -8,7 +8,7 @@
             <h1 class="font-serif text-4xl font-bold">Admin Panel</h1>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 transition-colors">
                     Logout
                 </button>
             </form>
@@ -16,45 +16,34 @@
 
         @if(session('success'))
         <div class="bg-green-500/15 border border-green-500/50 text-green-700 dark:text-green-400 px-4 py-3 rounded-md mb-6 text-sm flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+            <svg class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
             {{ session('success') }}
         </div>
         @endif
         @if($errors->any())
         <div class="bg-destructive/15 border border-destructive/50 text-destructive px-4 py-3 rounded-md mb-6 text-sm">
             <ul class="list-disc pl-5">
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                @foreach($errors->all() as $error) 
+                    <li>{{ $error }}</li> 
                 @endforeach
             </ul>
         </div>
         @endif
 
         <div class="grid w-full grid-cols-5 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground mb-6 space-x-1">
-            <button onclick="switchTab(event, 'tab-kategori')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:text-foreground">
-                Kategori
-            </button>
-            <button onclick="switchTab(event, 'tab-kedai')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:text-foreground">
-                Kedai
-            </button>
-            <button onclick="switchTab(event, 'tab-menu')" class="tab-btn active-tab inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all bg-background text-foreground shadow-sm">
-                Menu
-            </button>
-            <button onclick="switchTab(event, 'tab-relasi')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:text-foreground">
-                Relasi
-            </button>
-            <button onclick="switchTab(event, 'tab-pesan')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all hover:text-foreground">
-                Pesan
-            </button>
+            <button onclick="switchTab(event, 'tab-kategori')" class="tab-btn active-tab inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all bg-background text-foreground shadow-sm">Kategori</button>
+            <button onclick="switchTab(event, 'tab-kedai')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all hover:text-foreground">Kedai</button>
+            <button onclick="switchTab(event, 'tab-menu')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all hover:text-foreground">Menu</button>
+            <button onclick="switchTab(event, 'tab-relasi')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all hover:text-foreground">Relasi</button>
+            <button onclick="switchTab(event, 'tab-pesan')" class="tab-btn inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all hover:text-foreground">Pesan</button>
         </div>
 
-        <div class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+        <div class="mt-2">
             
-            <div id="tab-kategori" class="tab-content hidden space-y-6">
+            <div id="tab-kategori" class="tab-content space-y-6">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-serif font-semibold">Kelola Kategori</h2>
-                    <button onclick="openModal('modal-tambah-kategori')" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <button onclick="openModal('modal-kategori')" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 transition-colors">
                         Tambah Kategori
                     </button>
                 </div>
@@ -63,17 +52,28 @@
                     <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm p-6 relative">
                         <h3 class="font-semibold text-lg mb-2">{{ $kat->nama_kategori }}</h3>
                         <p class="text-sm text-muted-foreground mb-4">{{ $kat->deskripsi }}</p>
-                        <form action="{{ route('admin.kategori.destroy', $kat->id) }}" method="POST" class="absolute top-4 right-4" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-destructive hover:bg-destructive/10 p-2 rounded-md transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                        
+                        <div class="absolute top-4 right-4 flex items-center gap-1">
+                            <button type="button" 
+                                onclick="editKategori(this)" 
+                                data-id="{{ $kat->id }}" 
+                                data-nama="{{ $kat->nama_kategori }}" 
+                                data-deskripsi="{{ $kat->deskripsi }}" 
+                                class="text-blue-500 hover:bg-blue-500/10 p-2 rounded-md transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
                             </button>
-                        </form>
+                            <form action="{{ route('admin.kategori.destroy', $kat->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+                                @csrf 
+                                @method('DELETE')
+                                <button type="submit" class="text-destructive hover:bg-destructive/10 p-2 rounded-md transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                     @empty
                     <div class="col-span-3 text-center py-10 text-muted-foreground border border-border border-dashed rounded-xl bg-muted/50">
-                        Belum ada data kategori. Silakan tambah kategori terlebih dahulu.
+                        Belum ada data kategori.
                     </div>
                     @endforelse
                 </div>
@@ -82,27 +82,35 @@
             <div id="tab-kedai" class="tab-content hidden space-y-6">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-serif font-semibold">Kelola Kedai Kopi</h2>
-                    <button onclick="openModal('modal-tambah-kedai')" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <button onclick="openModal('modal-kedai')" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 transition-colors">
                         Tambah Kedai
                     </button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     @forelse($kedais as $shop)
                     <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
-                        <div class="flex flex-col space-y-1.5 p-6 pb-3">
-                            <h3 class="font-semibold leading-none tracking-tight text-xl">{{ $shop->nama_kedai }}</h3>
+                        <div class="p-6 pb-3">
+                            <h3 class="font-semibold text-xl">{{ $shop->nama_kedai }}</h3>
                         </div>
                         <div class="p-6 pt-0 space-y-4">
                             <p class="text-sm text-muted-foreground">{{ $shop->alamat }}</p>
-                            <p class="text-sm">{{ $shop->deskripsi }}</p>
+                            <p class="text-sm line-clamp-2">{{ $shop->deskripsi }}</p>
                             <div class="flex gap-2">
-                                <form action="{{ route('admin.kedai.destroy', $shop->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus kedai ini?');">
-                                    @csrf
+                                <button type="button" 
+                                    onclick="editKedai(this)" 
+                                    data-id="{{ $shop->id }}"
+                                    data-nama="{{ $shop->nama_kedai }}"
+                                    data-alamat="{{ $shop->alamat }}"
+                                    data-deskripsi="{{ $shop->deskripsi }}"
+                                    data-map="{{ $shop->map_url }}"
+                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> Edit
+                                </button>
+                                <form action="{{ route('admin.kedai.destroy', $shop->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kedai ini?');">
+                                    @csrf 
                                     @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-1"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                                        Hapus
+                                    <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Hapus
                                     </button>
                                 </form>
                             </div>
@@ -116,39 +124,42 @@
                 </div>
             </div>
 
-            <div id="tab-menu" class="tab-content space-y-6">
+            <div id="tab-menu" class="tab-content hidden space-y-6">
                 <div class="flex justify-between items-center">
                     <h2 class="text-2xl font-serif font-semibold">Kelola Menu Kopi</h2>
-                    <button onclick="openModal('modal-tambah-produk')" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-2"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                    <button onclick="openModal('modal-produk')" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 transition-colors">
                         Tambah Menu
                     </button>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     @forelse($produks as $item)
                     <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
-                        <div class="flex flex-col space-y-1.5 p-6 pb-3">
-                            <h3 class="font-semibold leading-none tracking-tight text-lg">{{ $item->nama_produk }}</h3>
+                        <div class="p-6 pb-3">
+                            <h3 class="font-semibold text-lg">{{ $item->nama_produk }}</h3>
                         </div>
                         <div class="p-6 pt-0 space-y-3">
-                            <div class="text-sm">
-                                <span class="text-muted-foreground">Kedai:</span> {{ $item->kedai->nama_kedai ?? 'Unknown' }}
-                            </div>
-                            <div class="text-sm">
-                                <span class="text-muted-foreground">Kategori:</span> {{ $item->kategori->nama_kategori ?? 'Tanpa Kategori' }}
-                            </div>
-                            <div class="text-sm">
-                                <span class="text-muted-foreground">Harga:</span> Rp {{ number_format($item->harga, 0, ',', '.') }}
-                            </div>
+                            <div class="text-sm"><span class="text-muted-foreground">Kedai:</span> {{ $item->kedai->nama_kedai ?? 'Unknown' }}</div>
+                            <div class="text-sm"><span class="text-muted-foreground">Kategori:</span> {{ $item->kategori->nama_kategori ?? 'Tanpa Kategori' }}</div>
+                            <div class="text-sm"><span class="text-muted-foreground">Harga:</span> Rp {{ number_format($item->harga, 0, ',', '.') }}</div>
                             <p class="text-sm text-muted-foreground line-clamp-2">{{ $item->deskripsi }}</p>
                             
                             <div class="flex gap-2 pt-2">
-                                <form action="{{ route('admin.produk.destroy', $item->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus menu ini?');">
-                                    @csrf
+                                <button type="button" 
+                                    onclick="editProduk(this)"
+                                    data-id="{{ $item->id }}"
+                                    data-kedai="{{ $item->id_kedai }}"
+                                    data-kategori="{{ $item->id_kategori }}"
+                                    data-nama="{{ $item->nama_produk }}"
+                                    data-deskripsi="{{ $item->deskripsi }}"
+                                    data-harga="{{ $item->harga }}"
+                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> Edit
+                                </button>
+                                <form action="{{ route('admin.produk.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus menu ini?');">
+                                    @csrf 
                                     @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-1"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                                        Hapus
+                                    <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Hapus
                                     </button>
                                 </form>
                             </div>
@@ -163,17 +174,15 @@
             </div>
 
             <div id="tab-relasi" class="tab-content hidden space-y-6">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-2xl font-serif font-semibold">Relasi Kategori & Kedai</h2>
-                </div>
+                <h2 class="text-2xl font-serif font-semibold">Relasi Kategori & Kedai</h2>
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class="col-span-1 rounded-xl border border-border bg-card shadow-sm p-6 h-fit">
-                        <h3 class="font-semibold text-lg mb-4 text-foreground">Hubungkan Kategori</h3>
+                    <div class="col-span-1 rounded-xl border border-border bg-card p-6 h-fit">
+                        <h3 class="font-semibold text-lg mb-4">Hubungkan Kategori</h3>
                         <form action="{{ route('admin.relasi.store') }}" method="POST" class="space-y-4">
                             @csrf
                             <div>
-                                <label class="text-sm font-medium leading-none mb-2 block text-foreground">Pilih Kedai</label>
-                                <select name="id_kedai" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+                                <label class="text-sm font-medium mb-2 block">Pilih Kedai</label>
+                                <select name="id_kedai" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                     <option value="" disabled selected>-- Pilih Kedai --</option>
                                     @foreach($kedais as $shop)
                                         <option value="{{ $shop->id }}">{{ $shop->nama_kedai }}</option>
@@ -181,43 +190,41 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="text-sm font-medium leading-none mb-2 block text-foreground">Pilih Kategori</label>
-                                <select name="id_kategori" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+                                <label class="text-sm font-medium mb-2 block">Pilih Kategori</label>
+                                <select name="id_kategori" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                                     <option value="" disabled selected>-- Pilih Kategori --</option>
                                     @foreach($kategoris as $kat)
                                         <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mt-2">
+                            <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-2">
                                 Tambahkan Relasi
                             </button>
                         </form>
                     </div>
 
-                    <div class="col-span-1 lg:col-span-2 rounded-xl border border-border bg-card shadow-sm p-6">
-                        <h3 class="font-semibold text-lg mb-4 text-foreground">Kategori per Kedai</h3>
+                    <div class="col-span-1 lg:col-span-2 rounded-xl border border-border bg-card p-6">
+                        <h3 class="font-semibold text-lg mb-4">Kategori per Kedai</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @forelse($kedais as $shop)
-                                <div class="border border-border rounded-lg p-4 bg-muted/20">
-                                    <h4 class="font-medium text-foreground mb-3">{{ $shop->nama_kedai }}</h4>
-                                    <div class="flex flex-wrap gap-2">
-                                        @forelse($shop->kategoris as $kat)
-                                            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-primary/10 text-primary border border-primary/20">
-                                                {{ $kat->nama_kategori }}
-                                                <form action="{{ route('admin.relasi.destroy', [$shop->id, $kat->id]) }}" method="POST" class="inline" onsubmit="return confirm('Lepas kategori ini dari kedai?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="hover:text-destructive focus:outline-none text-primary/70 transition-colors hover:text-red-500">
-                                                        <svg class="h-3.5 w-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                                                    </button>
-                                                </form>
-                                            </span>
-                                        @empty
-                                            <span class="text-xs text-muted-foreground italic">Belum ada relasi kategori.</span>
-                                        @endforelse
-                                    </div>
+                            <div class="border border-border rounded-lg p-4 bg-muted/20">
+                                <h4 class="font-medium mb-3">{{ $shop->nama_kedai }}</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    @forelse($shop->kategoris as $kat)
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                                            {{ $kat->nama_kategori }}
+                                            <form action="{{ route('admin.relasi.destroy', [$shop->id, $kat->id]) }}" method="POST" class="inline" onsubmit="return confirm('Lepas kategori ini?');">
+                                                @csrf 
+                                                @method('DELETE')
+                                                <button type="submit" class="hover:text-red-500 font-bold ml-1">×</button>
+                                            </form>
+                                        </span>
+                                    @empty
+                                        <span class="text-xs text-muted-foreground italic">Belum ada relasi.</span>
+                                    @endforelse
                                 </div>
+                            </div>
                             @empty
                                 <div class="col-span-2 text-center text-sm text-muted-foreground">Belum ada data kedai.</div>
                             @endforelse
@@ -227,37 +234,25 @@
             </div>
 
             <div id="tab-pesan" class="tab-content hidden space-y-6">
-                <div class="flex justify-between items-center">
-                    <h2 class="text-2xl font-serif font-semibold">Pesan Masuk</h2>
-                </div>
+                <h2 class="text-2xl font-serif font-semibold">Pesan Masuk</h2>
                 <div class="grid grid-cols-1 gap-4">
                     @forelse($pesans as $msg)
-                    <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm p-6 relative overflow-hidden">
+                    <div class="rounded-xl border border-border bg-card p-6 relative">
                         <div class="flex justify-between items-start mb-4">
                             <div>
                                 <h3 class="font-semibold text-lg">{{ $msg->nama }}</h3>
-                                <div class="flex items-center text-sm text-muted-foreground mt-1 space-x-2">
-                                    <span>{{ $msg->email }}</span>
-                                    <span>•</span>
-                                    <span>{{ $msg->created_at->format('d M Y, H:i') }}</span>
-                                </div>
+                                <div class="text-sm text-muted-foreground mt-1">{{ $msg->email }} • {{ $msg->created_at->format('d M Y, H:i') }}</div>
                             </div>
-                            <form action="{{ route('admin.pesan.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Yakin mau hapus pesan ini?');">
-                                @csrf
+                            <form action="{{ route('admin.pesan.destroy', $msg->id) }}" method="POST" onsubmit="return confirm('Yakin hapus pesan?');">
+                                @csrf 
                                 @method('DELETE')
-                                <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-destructive/10 text-destructive h-9 w-9">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
-                                </button>
+                                <button type="submit" class="text-destructive hover:text-red-700 font-medium text-sm">Hapus</button>
                             </form>
                         </div>
-                        <div class="pt-4 border-t border-border">
-                            <p class="text-sm leading-relaxed">{{ $msg->pesan }}</p>
-                        </div>
+                        <p class="text-sm pt-4 border-t border-border">{{ $msg->pesan }}</p>
                     </div>
-                    @empty
-                    <div class="text-center py-10 text-muted-foreground border border-border border-dashed rounded-xl bg-muted/50">
-                        Belum ada pesan masuk dari pengunjung.
-                    </div>
+                    @empty 
+                        <div class="text-center py-10 text-muted-foreground border border-border border-dashed rounded-xl bg-muted/50">Belum ada pesan masuk.</div> 
                     @endforelse
                 </div>
             </div>
@@ -266,159 +261,201 @@
     </div>
 </div>
 
-<div id="modal-tambah-kategori" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4 transition-opacity">
-    <div class="bg-background rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto border border-border">
-        <div class="flex flex-col space-y-1.5 p-6 border-b border-border">
-            <div class="flex justify-between items-center">
-                <h3 class="font-semibold leading-none tracking-tight text-lg text-foreground">Tambah Kategori</h3>
-                <button type="button" onclick="closeModal('modal-tambah-kategori')" class="text-muted-foreground hover:text-foreground rounded-sm opacity-70 transition-opacity focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                </button>
-            </div>
+<div id="modal-kategori" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-background rounded-lg shadow-lg w-full max-w-md border border-border">
+        <div class="p-6 border-b border-border flex justify-between items-center">
+            <h3 id="title-kategori" class="font-semibold text-lg">Tambah Kategori</h3>
+            <button type="button" onclick="closeModal('modal-kategori')" class="text-muted-foreground hover:text-foreground">✕</button>
         </div>
-        <form action="{{ route('admin.kategori.store') }}" method="POST" class="p-6 space-y-4">
-            @csrf
+        <form id="form-kategori" method="POST" action="{{ route('admin.kategori.store') }}" class="p-6 space-y-4">
+            @csrf 
+            <input type="hidden" name="_method" id="method-kategori" value="POST">
             <div>
-                <label class="text-sm font-medium mb-2 block text-foreground">Nama Kategori</label>
-                <input type="text" name="nama_kategori" required placeholder="Contoh: Espresso Based" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <label class="text-sm font-medium mb-2 block">Nama Kategori</label>
+                <input type="text" id="input_nama_kategori" name="nama_kategori" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
             </div>
             <div>
-                <label class="text-sm font-medium mb-2 block text-foreground">Deskripsi (Opsional)</label>
-                <textarea name="deskripsi" rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></textarea>
+                <label class="text-sm font-medium mb-2 block">Deskripsi</label>
+                <textarea name="deskripsi" id="input_deskripsi_kategori" rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
             </div>
-            <div class="pt-4">
-                <button type="submit" class="inline-flex w-full items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Simpan Kategori</button>
-            </div>
+            <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-4">Simpan</button>
         </form>
     </div>
 </div>
 
-<div id="modal-tambah-kedai" class="fixed inset-0 z-[60] hidden bg-black/80 flex items-center justify-center p-4 transition-opacity">
-    <div class="bg-background rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-border">
-        <div class="flex flex-col space-y-1.5 p-6 border-b border-border">
-            <div class="flex justify-between items-center">
-                <h3 class="font-semibold leading-none tracking-tight text-lg text-foreground">Tambah Kedai</h3>
-                <button type="button" onclick="closeModal('modal-tambah-kedai')" class="text-muted-foreground hover:text-foreground rounded-sm opacity-70 transition-opacity focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                </button>
-            </div>
+<div id="modal-kedai" class="fixed inset-0 z-[60] hidden bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-background rounded-lg shadow-lg w-full max-w-2xl border border-border max-h-[90vh] overflow-y-auto">
+        <div class="p-6 border-b border-border flex justify-between items-center">
+            <h3 id="title-kedai" class="font-semibold text-lg">Tambah Kedai</h3>
+            <button type="button" onclick="closeModal('modal-kedai')" class="text-muted-foreground hover:text-foreground">✕</button>
         </div>
-        <form action="{{ route('admin.kedai.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
-            @csrf
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Nama Kedai</label><input type="text" name="nama_kedai" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></div>
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Alamat</label><input type="text" name="alamat" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></div>
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Deskripsi</label><textarea name="deskripsi" required rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></textarea></div>
+        <form id="form-kedai" method="POST" action="{{ route('admin.kedai.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
+            @csrf 
+            <input type="hidden" name="_method" id="method-kedai" value="POST">
             <div>
-                <label class="text-sm font-medium mb-2 block text-foreground">Gambar</label>
-                <div class="space-y-3">
-                    <div id="preview-container-kedai" class="relative w-full h-48 rounded-lg overflow-hidden border border-input hidden bg-muted">
-                        <img id="preview-kedai" src="" alt="Preview" class="w-full h-full object-cover" />
-                        <button type="button" onclick="clearFileKedai()" class="absolute top-2 right-2 inline-flex items-center justify-center rounded-md text-sm font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 w-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                        </button>
-                    </div>
-                    <input type="file" id="input-gambar-kedai" name="gambar" accept="image/*" onchange="previewImageKedai(event)" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-muted file:px-4 file:py-1 hover:file:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                </div>
+                <label class="text-sm font-medium mb-2 block">Nama Kedai</label>
+                <input type="text" id="input_nama_kedai" name="nama_kedai" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
             </div>
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Map URL</label><textarea name="map_url" rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea></div>
-            <div class="pt-4"><button type="submit" class="inline-flex w-full items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Tambah Kedai</button></div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Alamat</label>
+                <input type="text" id="input_alamat_kedai" name="alamat" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+            </div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Deskripsi</label>
+                <textarea id="input_deskripsi_kedai" name="deskripsi" required rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
+            </div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Gambar (Opsional saat edit)</label>
+                <input type="file" name="gambar" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-muted file:px-4 file:py-1">
+            </div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Map URL</label>
+                <textarea id="input_map_kedai" name="map_url" rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-4">Simpan</button>
         </form>
     </div>
 </div>
 
-<div id="modal-tambah-produk" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-4 transition-opacity">
-    <div class="bg-background rounded-lg shadow-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-border">
-        <div class="flex flex-col space-y-1.5 p-6 border-b border-border">
-            <div class="flex justify-between items-center">
-                <h3 class="font-semibold leading-none tracking-tight text-lg text-foreground">Tambah Menu</h3>
-                <button type="button" onclick="closeModal('modal-tambah-produk')" class="text-muted-foreground hover:text-foreground rounded-sm opacity-70 transition-opacity focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                </button>
-            </div>
+<div id="modal-produk" class="fixed inset-0 z-[60] hidden bg-black/80 flex items-center justify-center p-4">
+    <div class="bg-background rounded-lg shadow-lg w-full max-w-2xl border border-border max-h-[90vh] overflow-y-auto">
+        <div class="p-6 border-b border-border flex justify-between items-center">
+            <h3 id="title-produk" class="font-semibold text-lg">Tambah Menu</h3>
+            <button type="button" onclick="closeModal('modal-produk')" class="text-muted-foreground hover:text-foreground">✕</button>
         </div>
-        <form action="{{ route('admin.produk.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
-            @csrf
+        <form id="form-produk" method="POST" action="{{ route('admin.produk.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
+            @csrf 
+            <input type="hidden" name="_method" id="method-produk" value="POST">
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <label class="text-sm font-medium mb-2 block text-foreground">Kedai</label>
-                    <select name="id_kedai" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-                        <option value="" disabled selected>Pilih kedai</option>
+                    <label class="text-sm font-medium mb-2 block">Kedai</label>
+                    <select id="input_kedai_produk" name="id_kedai" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                        <option value="">-- Pilih Kedai --</option>
                         @foreach($kedais as $kedai)
                             <option value="{{ $kedai->id }}">{{ $kedai->nama_kedai }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div>
-                    <label class="text-sm font-medium mb-2 block text-foreground">Kategori</label>
-                    <select name="id_kategori" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-                        <option value="" disabled selected>Pilih kategori</option>
+                    <label class="text-sm font-medium mb-2 block">Kategori</label>
+                    <select id="input_kategori_produk" name="id_kategori" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                        <option value="">-- Pilih Kategori --</option>
                         @foreach($kategoris as $kat)
                             <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Nama Menu</label><input type="text" name="nama_produk" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></div>
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Deskripsi</label><textarea name="deskripsi" required rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></textarea></div>
-            <div><label class="text-sm font-medium mb-2 block text-foreground">Harga (Rp)</label><input type="number" name="harga" required min="0" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"></div>
             <div>
-                <label class="text-sm font-medium mb-2 block text-foreground">Gambar</label>
-                <div class="space-y-3">
-                    <div id="image-preview-container" class="relative w-full h-48 rounded-lg overflow-hidden border border-input hidden bg-muted">
-                        <img id="image-preview" src="" alt="Preview" class="w-full h-full object-cover" />
-                        <button type="button" onclick="clearFile()" class="absolute top-2 right-2 inline-flex items-center justify-center rounded-md text-sm font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 w-10">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                        </button>
-                    </div>
-                    <input type="file" id="gambar-input" name="gambar" accept="image/*" onchange="previewImage(event)" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-muted file:px-4 file:py-1 hover:file:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-                </div>
+                <label class="text-sm font-medium mb-2 block">Nama Menu</label>
+                <input type="text" id="input_nama_produk" name="nama_produk" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
             </div>
-            <div class="pt-4"><button type="submit" class="inline-flex w-full items-center justify-center rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">Tambah Menu</button></div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Deskripsi</label>
+                <textarea id="input_deskripsi_produk" name="deskripsi" required rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
+            </div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Harga</label>
+                <input type="number" id="input_harga_produk" name="harga" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+            </div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Gambar (Opsional saat edit)</label>
+                <input type="file" name="gambar" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:border-0 file:bg-muted file:px-4 file:py-1">
+            </div>
+            <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-4">Simpan</button>
         </form>
     </div>
 </div>
 
 <script>
-    // 1. Script Pindah Tab
+    // 1. Script Pindah Tab & Memori LocalStorage
     function switchTab(event, tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-        document.querySelectorAll('.tab-btn').forEach(el => {
-            el.classList.remove('bg-background', 'text-foreground', 'shadow-sm', 'active-tab');
-            el.classList.add('hover:text-foreground');
+        document.querySelectorAll('.tab-btn').forEach(el => { 
+            el.classList.remove('bg-background', 'text-foreground', 'shadow-sm', 'active-tab'); 
+            el.classList.add('hover:text-foreground'); 
         });
         document.getElementById(tabId).classList.remove('hidden');
-        event.currentTarget.classList.remove('hover:text-foreground');
-        event.currentTarget.classList.add('bg-background', 'text-foreground', 'shadow-sm', 'active-tab');
+        
+        let targetBtn = event ? event.currentTarget : document.querySelector(`button[onclick*="${tabId}"]`);
+        if(targetBtn) { 
+            targetBtn.classList.remove('hover:text-foreground'); 
+            targetBtn.classList.add('bg-background', 'text-foreground', 'shadow-sm', 'active-tab'); 
+        }
+        localStorage.setItem('activeAdminTab', tabId);
     }
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        let savedTab = localStorage.getItem('activeAdminTab') || 'tab-kategori';
+        switchTab(null, savedTab);
+    });
 
-    // 2. Script Buka Tutup Modal Umum
-    function openModal(modalId) { document.getElementById(modalId).classList.remove('hidden'); }
-    function closeModal(modalId) { document.getElementById(modalId).classList.add('hidden'); }
-
-    // 3. Script Preview & Clear Gambar untuk Menu
-    function previewImage(event) {
-        const input = event.target; const container = document.getElementById('image-preview-container'); const preview = document.getElementById('image-preview');
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) { preview.src = e.target.result; container.classList.remove('hidden'); }
-            reader.readAsDataURL(input.files[0]);
+    // 2. Fungsi Modal General
+    function openModal(modalId) { 
+        document.getElementById(modalId).classList.remove('hidden'); 
+    }
+    
+    function closeModal(modalId) { 
+        document.getElementById(modalId).classList.add('hidden'); 
+        
+        // Reset form ke mode POST (Tambah Data) tiap modal ditutup
+        if(modalId === 'modal-kategori') { 
+            document.getElementById('method-kategori').value = 'POST'; 
+            document.getElementById('form-kategori').action = '{{ url("admin/kategori") }}'; 
+            document.getElementById('form-kategori').reset(); 
+            document.getElementById('title-kategori').innerText = 'Tambah Kategori'; 
+        }
+        if(modalId === 'modal-kedai') { 
+            document.getElementById('method-kedai').value = 'POST'; 
+            document.getElementById('form-kedai').action = '{{ url("admin/kedai") }}'; 
+            document.getElementById('form-kedai').reset(); 
+            document.getElementById('title-kedai').innerText = 'Tambah Kedai'; 
+        }
+        if(modalId === 'modal-produk') { 
+            document.getElementById('method-produk').value = 'POST'; 
+            document.getElementById('form-produk').action = '{{ url("admin/produk") }}'; 
+            document.getElementById('form-produk').reset(); 
+            document.getElementById('title-produk').innerText = 'Tambah Menu'; 
         }
     }
-    function clearFile() {
-        document.getElementById('gambar-input').value = ''; document.getElementById('image-preview').src = ''; document.getElementById('image-preview-container').classList.add('hidden');
+
+    // 3. Fungsi Edit Data (Mengambil data dari atribut HTML data-*)
+    function editKategori(btn) {
+        document.getElementById('title-kategori').innerText = 'Edit Kategori';
+        document.getElementById('method-kategori').value = 'PUT';
+        document.getElementById('form-kategori').action = `{{ url('admin/kategori') }}/${btn.dataset.id}`;
+        
+        document.getElementById('input_nama_kategori').value = btn.dataset.nama;
+        document.getElementById('input_deskripsi_kategori').value = btn.dataset.deskripsi;
+        
+        openModal('modal-kategori');
     }
 
-    // 4. Script Preview & Clear Gambar untuk Kedai
-    function previewImageKedai(event) {
-        const input = event.target; const container = document.getElementById('preview-container-kedai'); const preview = document.getElementById('preview-kedai');
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) { preview.src = e.target.result; container.classList.remove('hidden'); }
-            reader.readAsDataURL(input.files[0]);
-        }
+    function editKedai(btn) {
+        document.getElementById('title-kedai').innerText = 'Edit Kedai';
+        document.getElementById('method-kedai').value = 'PUT';
+        document.getElementById('form-kedai').action = `{{ url('admin/kedai') }}/${btn.dataset.id}`;
+        
+        document.getElementById('input_nama_kedai').value = btn.dataset.nama;
+        document.getElementById('input_alamat_kedai').value = btn.dataset.alamat;
+        document.getElementById('input_deskripsi_kedai').value = btn.dataset.deskripsi;
+        document.getElementById('input_map_kedai').value = btn.dataset.map;
+        
+        openModal('modal-kedai');
     }
-    function clearFileKedai() {
-        document.getElementById('input-gambar-kedai').value = ''; document.getElementById('preview-kedai').src = ''; document.getElementById('preview-container-kedai').classList.add('hidden');
+
+    function editProduk(btn) {
+        document.getElementById('title-produk').innerText = 'Edit Menu';
+        document.getElementById('method-produk').value = 'PUT';
+        document.getElementById('form-produk').action = `{{ url('admin/produk') }}/${btn.dataset.id}`;
+        
+        document.getElementById('input_kedai_produk').value = btn.dataset.kedai;
+        document.getElementById('input_kategori_produk').value = btn.dataset.kategori;
+        document.getElementById('input_nama_produk').value = btn.dataset.nama;
+        document.getElementById('input_deskripsi_produk').value = btn.dataset.deskripsi;
+        document.getElementById('input_harga_produk').value = btn.dataset.harga;
+        
+        openModal('modal-produk');
     }
 </script>
 @endsection

@@ -61,18 +61,16 @@ class KedaiController extends Controller
             'alamat' => 'required',
             'kontak' => 'nullable|string',
             'deskripsi' => 'nullable|string',
+            'map_url' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $data = $request->all();
 
-        // Cek kalau admin upload gambar baru
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama dulu dari storage kalau ada
             if ($kedai->gambar) {
                 Storage::disk('public')->delete($kedai->gambar);
             }
-            // Simpan gambar baru
             $data['gambar'] = $request->file('gambar')->store('kedai', 'public');
         }
 
