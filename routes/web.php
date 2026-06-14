@@ -32,11 +32,12 @@ Route::middleware('auth')->group(function () {
     
     // 1. Dashboard utama admin 
     Route::get('/admin', function () {
-        $produks = \App\Models\Produk::with('kedai')->get();
+        $produks = \App\Models\Produk::with('kedai', 'kategori')->get();
         $kedais = \App\Models\Kedai::all();
-        // Kalau ada pesan, tambahin juga: $pesans = \App\Models\Pesan::all();
+        $pesans = \App\Models\Pesan::orderBy('created_at', 'desc')->get();
+        $kategoris = \App\Models\Kategori::all();
         
-        return view('admin.dashboard', compact('produks', 'kedais')); 
+        return view('admin.dashboard', compact('produks', 'kedais', 'pesans', 'kategoris')); 
     })->name('admin.dashboard'); 
     
     // 2. CRUD Data Master Admin pakai Route::resource

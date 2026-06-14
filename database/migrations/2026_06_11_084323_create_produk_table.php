@@ -14,9 +14,9 @@ return new class extends Migration
             $table->foreignId('id_kedai')->constrained('kedai')->onDelete('cascade');
             $table->string('nama_produk');
             $table->integer('harga');
-            $table->string('jenis_kopi')->nullable();
+            $table->foreignId('id_kategori')->constrained('kategori')->cascadeOnDelete();
             $table->text('deskripsi')->nullable();
-            $table->string('gambar')->nullable(); // Untuk path foto produk
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }
