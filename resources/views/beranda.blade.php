@@ -21,7 +21,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
         <a href="{{ route('produk.index') }}" class="w-full sm:w-[220px] inline-flex h-12 items-center justify-center rounded-md font-medium border-2 border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground px-8 shadow-lg hover:shadow-xl transition-all">
-          Lihat Kategori Kedai
+          Lihat Kategori
         </a>
       </div>
       

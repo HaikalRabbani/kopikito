@@ -4,16 +4,16 @@
 <div class="min-h-screen bg-muted/30 pt-24 pb-20">
     <div class="container mx-auto px-4 max-w-6xl">
         
-        <div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12 animate-fade-in-up">
-            <div>
+        <div class="flex flex-col items-center text-center gap-6 mb-12 animate-fade-in-up">
+            <div class="flex flex-col items-center">
                 <h1 class="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">Direktori Kedai Kopi</h1>
                 <div class="w-20 h-1 bg-primary rounded-full mb-4"></div>
-                <p class="text-lg text-muted-foreground max-w-2xl">
+                <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
                     Temukan tempat nongkrong, nugas, atau sekadar menikmati secangkir kopi terbaik di Bengkulu.
                 </p>
             </div>
 
-            <form action="{{ route('kedai.index') }}" method="GET" class="w-full md:w-auto flex items-center gap-2 bg-background p-2 rounded-lg border border-border shadow-sm">
+            <form action="{{ route('kedai.index') }}" method="GET" class="w-full md:w-auto flex items-center justify-center gap-2 bg-background p-2 rounded-lg border border-border shadow-sm">
                 <div class="relative w-full md:w-64">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
                     <select name="kategori" class="w-full h-10 pl-9 pr-4 text-sm rounded-md border-none bg-transparent focus:ring-0 cursor-pointer appearance-none">
