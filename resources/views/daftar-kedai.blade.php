@@ -17,7 +17,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       
-      @forelse ($kedai as $shop)
+      @forelse ($kedais as $shop)
         <div class="rounded-xl border bg-card text-card-foreground shadow group overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary h-full flex flex-col">
           
           <div class="aspect-video overflow-hidden bg-muted">

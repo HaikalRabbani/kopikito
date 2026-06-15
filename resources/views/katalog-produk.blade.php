@@ -19,7 +19,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       
       {{-- Mengecek apakah ada data produk di database --}}
-      @forelse ($produk as $item)
+      @forelse ($produks as $item)
         <div class="rounded-xl border bg-card text-card-foreground shadow group overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary h-full flex flex-col">
           
           <div class="aspect-square overflow-hidden bg-muted">

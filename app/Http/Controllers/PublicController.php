@@ -1,35 +1,49 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Kedai;
 use App\Models\Produk;
 use App\Models\Pesan;
+use App\Models\Kategori;
 
 class PublicController extends Controller
 {
     // Nampilin Beranda
     public function index()
     {
-        return view('beranda');
+        $kategoris = Kategori::all();
+        return view('beranda', compact('kategoris'));
     }
 
     // Nampilin Daftar Kedai
-    public function daftarKedai()
+    public function daftarKedai(Request $request)
     {
-        $kedai = Kedai::all();
-        return view('daftar-kedai', compact('kedai'));
+        $query = Kedai::with('kategoris');
+
+        // Logika Filter: Kalau ada param ?kategori= di URL (dari klik card beranda)
+        if ($request->has('kategori') && $request->kategori != '') {
+            $id_kat = $request->kategori;
+            $query->whereHas('kategoris', function($q) use ($id_kat) {
+                $q->where('kategori.id', $id_kat);
+            });
+        }
+
+        $kedais = $query->get();
+        
+        // Bawa data kategori juga buat opsi dropdown filter di halamannya nanti
+        $kategoris = Kategori::all(); 
+
+        return view('daftar-kedai', compact('kedais', 'kategoris'));
     }
 
     // Nampilin Katalog Produk
     public function katalogProduk()
     {
-        // Panggil produk beserta data kedainya (biar ketahuan ini kopi dari kedai mana)
-        $produk = Produk::with('kedai')->get();
-        return view('katalog-produk', compact('produk'));
+        $produks = Produk::with(['kedai', 'kategori'])->get();
+        return view('katalog-produk', compact('produks'));
     }
-
+    
     // Nampilin Form Hubungi Kami
     public function hubungiKami()
     {
