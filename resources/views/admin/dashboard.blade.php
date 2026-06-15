@@ -50,6 +50,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     @forelse($kategoris as $kat)
                     <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm p-6 relative">
+                        @if($kat->gambar)
+                            <div class="w-12 h-12 rounded-md overflow-hidden mb-3 border border-border">
+                                <img src="{{ asset('storage/' . $kat->gambar) }}" class="w-full h-full object-cover">
+                            </div>
+                        @endif
                         <h3 class="font-semibold text-lg mb-2">{{ $kat->nama_kategori }}</h3>
                         <p class="text-sm text-muted-foreground mb-4">{{ $kat->deskripsi }}</p>
                         
@@ -86,16 +91,36 @@
                         Tambah Kedai
                     </button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     @forelse($kedais as $shop)
-                    <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
-                        <div class="p-6 pb-3">
-                            <h3 class="font-semibold text-xl">{{ $shop->nama_kedai }}</h3>
+                    <div class="rounded-xl border border-border bg-card text-card-foreground shadow-sm overflow-hidden flex flex-col">
+                        
+                        <div class="aspect-video w-full bg-muted relative overflow-hidden border-b border-border">
+                            @if($shop->gambar)
+                                <img src="{{ asset('storage/' . $shop->gambar) }}" alt="{{ $shop->nama_kedai }}" class="w-full h-full object-cover">
+                            @else
+                                <div class="flex flex-col items-center justify-center w-full h-full text-muted-foreground opacity-50">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-2"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+                                    <span class="text-sm">Belum ada foto</span>
+                                </div>
+                            @endif
                         </div>
-                        <div class="p-6 pt-0 space-y-4">
-                            <p class="text-sm text-muted-foreground">{{ $shop->alamat }}</p>
-                            <p class="text-sm line-clamp-2">{{ $shop->deskripsi }}</p>
-                            <div class="flex gap-2">
+
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="font-bold text-xl mb-1">{{ $shop->nama_kedai }}</h3>
+                            <p class="text-sm text-muted-foreground mb-3 flex items-start gap-1.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0 mt-0.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                {{ $shop->alamat }}
+                            </p>
+                            <p class="text-sm line-clamp-2 mb-4">{{ $shop->deskripsi }}</p>
+
+                            @if($shop->map_url)
+                                <div class="mb-5 rounded-lg overflow-hidden border border-border aspect-video w-full bg-muted [&>iframe]:w-full [&>iframe]:h-full">
+                                    {!! $shop->map_url !!}
+                                </div>
+                            @endif
+
+                            <div class="flex gap-2 mt-auto pt-4 border-t border-border">
                                 <button type="button" 
                                     onclick="editKedai(this)" 
                                     data-id="{{ $shop->id }}"
@@ -103,14 +128,14 @@
                                     data-alamat="{{ $shop->alamat }}"
                                     data-deskripsi="{{ $shop->deskripsi }}"
                                     data-map="{{ $shop->map_url }}"
-                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> Edit
+                                    class="inline-flex items-center justify-center rounded-md text-sm font-medium border border-input bg-background hover:bg-accent h-9 px-4 w-full">
+                                    Edit
                                 </button>
-                                <form action="{{ route('admin.kedai.destroy', $shop->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kedai ini?');">
+                                <form action="{{ route('admin.kedai.destroy', $shop->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus kedai ini?');" class="w-full">
                                     @csrf 
                                     @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg> Hapus
+                                    <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 h-9 px-4 w-full">
+                                        Hapus
                                     </button>
                                 </form>
                             </div>
@@ -267,7 +292,7 @@
             <h3 id="title-kategori" class="font-semibold text-lg">Tambah Kategori</h3>
             <button type="button" onclick="closeModal('modal-kategori')" class="text-muted-foreground hover:text-foreground">✕</button>
         </div>
-        <form id="form-kategori" method="POST" action="{{ route('admin.kategori.store') }}" class="p-6 space-y-4">
+        <form id="form-kategori" method="POST" action="{{ route('admin.kategori.store') }}" enctype="multipart/form-data" class="p-6 space-y-4">
             @csrf 
             <input type="hidden" name="_method" id="method-kategori" value="POST">
             <div>
@@ -277,6 +302,10 @@
             <div>
                 <label class="text-sm font-medium mb-2 block">Deskripsi</label>
                 <textarea name="deskripsi" id="input_deskripsi_kategori" rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
+            </div>
+            <div>
+                <label class="text-sm font-medium mb-2 block">Gambar Kategori (Opsional)</label>
+                <input type="file" name="gambar" accept="image/jpeg,image/png,image/jpg" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-muted file:px-4 file:py-1 cursor-pointer">
             </div>
             <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-4">Simpan</button>
         </form>
@@ -305,12 +334,15 @@
                 <textarea id="input_deskripsi_kedai" name="deskripsi" required rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
             </div>
             <div>
-                <label class="text-sm font-medium mb-2 block">Gambar (Opsional saat edit)</label>
-                <input type="file" name="gambar" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-muted file:px-4 file:py-1">
+                <label class="text-sm font-medium mb-2 block">Foto Kedai (Opsional)</label>
+                <input type="file" name="gambar" accept="image/jpeg,image/png,image/jpg" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:rounded-sm file:border-0 file:bg-muted file:px-4 file:py-1 cursor-pointer">
             </div>
             <div>
-                <label class="text-sm font-medium mb-2 block">Map URL</label>
-                <textarea id="input_map_kedai" name="map_url" rows="3" class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
+                <label class="text-sm font-medium mb-2 block text-blue-600 dark:text-blue-400">Google Maps Embed HTML (Iframe)</label>
+                <textarea id="input_map_kedai" name="map_url" rows="3" placeholder='<iframe src="https://www.google.com/maps/embed?..."></iframe>' class="flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm"></textarea>
+                <p class="text-xs text-muted-foreground mt-1 font-medium">
+                    *Cara: Buka Google Maps > Cari Kedai > Klik Bagikan > Sematkan Peta > Copy HTML > Paste kesini.
+                </p>
             </div>
             <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-4">Simpan</button>
         </form>
@@ -359,8 +391,8 @@
                 <input type="number" id="input_harga_produk" name="harga" required class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
             </div>
             <div>
-                <label class="text-sm font-medium mb-2 block">Gambar (Opsional saat edit)</label>
-                <input type="file" name="gambar" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:border-0 file:bg-muted file:px-4 file:py-1">
+                <label class="text-sm font-medium mb-2 block">Gambar (Opsional)</label>
+                <input type="file" name="gambar" accept="image/jpeg,image/png,image/jpg" class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm file:mr-4 file:border-0 file:bg-muted file:px-4 file:py-1 cursor-pointer">
             </div>
             <button type="submit" class="w-full bg-primary text-primary-foreground h-10 rounded-md text-sm font-medium mt-4">Simpan</button>
         </form>

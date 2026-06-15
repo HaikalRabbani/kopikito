@@ -16,6 +16,7 @@ Route::get('/daftar-kedai', [PublicController::class, 'daftarKedai'])->name('ked
 Route::get('/tentang-kami', [PublicController::class, 'tentangKami'])->name('tentang');
 Route::get('/hubungi-kami', [PublicController::class, 'kontak'])->name('kontak');
 Route::post('/hubungi-kami', [PublicController::class, 'storeKontak'])->name('kontak.store');
+Route::get('/kedai/{id}', [PublicController::class, 'detailKedai'])->name('kedai.show');
 
 // ================= ROUTE AUTHENTICATION (LOGIN/REGISTER) ================= //
 // Route khusus yang BELUM login (Guest)

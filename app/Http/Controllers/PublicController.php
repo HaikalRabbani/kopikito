@@ -37,11 +37,28 @@ class PublicController extends Controller
         return view('daftar-kedai', compact('kedais', 'kategoris'));
     }
 
-    // Nampilin Katalog Produk
-    public function katalogProduk()
+    // Fungsi baru untuk nampilin halaman Detail Kedai
+    public function detailKedai($id)
     {
-        $produks = Produk::with(['kedai', 'kategori'])->get();
-        return view('katalog-produk', compact('produks'));
+        $kedai = Kedai::with('kategoris')->findOrFail($id);
+        $menus = \App\Models\Produk::with('kategori')->where('id_kedai', $id)->get();
+        $kategoriIds = $kedai->kategoris->pluck('id');
+        $relatedKedais = Kedai::whereHas('kategoris', function($query) use ($kategoriIds) {
+            $query->whereIn('kategori.id', $kategoriIds);
+        })
+        ->where('id', '!=', $id)
+        ->take(6)
+        ->get();
+
+        return view('detail-kedai', compact('kedai', 'menus', 'relatedKedais'));
+    }
+
+    // Nampilin Katalog Produk
+   public function katalogProduk()
+    {
+        $kategoris = Kategori::all(); 
+        
+        return view('katalog-produk', compact('kategoris'));
     }
     
     // Nampilin Form Hubungi Kami
